@@ -1,0 +1,114 @@
+.dirs div:hover {
+  transform: scale(1.2, 1.2);
+  box-shadow: 0px 0px 20px 14px black;
+}
+.design-main {
+  display: none;
+  width: 100%;
+  margin: 25px 0;
+  align-items: center;
+  justify-content: center;
+}
+.dirs {
+  display: flex;
+  width: 90%;
+  padding: 25px 0;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 2px solid #e96e24;
+  border-radius: 25px;
+  background-color: rgb(15, 15, 15);
+}
+.dirs div {
+  display: flex;
+  width: 22vw;
+  min-width: 200px;
+  max-width: 260px;
+  height: 22vw;
+  min-height: 200px;
+  max-height: 260px;
+  margin: 25px;
+  border-radius: 5px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 20px 10px black;
+  transition:
+    transform 1.4s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+    box-shadow 1.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+.img1 {
+  background: url(./photos/dir1/k2.jpg), black;
+}
+.img2 {
+  background: url(./photos/dir2/bedroom2.3.jpg), black;
+}
+.img3 {
+  background: url(./photos/dir3/gostinaya2.jpg), black;
+}
+.img4 {
+  background: url(./photos/dir4/View1.jpg), black;
+}
+
+.slider {
+  display: flex;
+  width: 100%;
+  height: 88vh;
+  position: fixed;
+  top: 12vh;
+  justify-content: center;
+  background-color: rgba(30, 30, 30, 0.9);
+}
+.sliderHide {
+  visibility: hidden;
+}
+.slider .close {
+  width: 70px;
+  height: 70px;
+  margin-top: 25px;
+  background-image: url(./icons/close2.png);
+  background-size: contain;
+}
+.slider > div {
+  display: flex;
+  width: 60%;
+  max-width: 900px;
+  height: 80%;
+  margin-top: 120px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  overflow: hidden;
+}
+
+.slideImg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: center/cover no-repeat;
+  transform: translateX(100%);
+  transition: transform 0.6s linear;
+  will-change: transform;
+}
+
+div.slideBtns {
+  justify-content: space-between;
+}
+.slideBtns div {
+  width: 10%;
+  height: 100%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0,0, 0);
+  transition: background-color 0.4s linear;
+}
+.slideBtns div:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+.slideBtns div:first-child{
+  background-image: url(./icons/back.svg);
+}
+.slideBtns div:last-child {
+  background-image: url(./icons/next.svg);
+}

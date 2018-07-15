@@ -1,0 +1,143 @@
+@font-face {
+  font-family: hnc;
+  src: url(./HelveticaNeueCyr-Thin.ttf);
+}
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: black;
+  color: Gainsboro;
+  font-size: calc(1.5vh + 1.5vw);
+  font-family: hnc;
+}
+
+.header, .content {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.header {
+  height: 12vh;
+  position: fixed;
+  background-color: rgb(20, 20, 20);
+  font-size: calc(1.5vh + 1.5vw);
+  font-family: serif;
+}
+.header > div {
+  width: calc(100%/3);
+  height: 100%;
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  transition: background-color 0.4s linear;
+}
+.header > div:hover {
+  background-color: rgb(10, 10 ,10);
+}
+.btn-active {
+  background-color: rgb(60, 60, 60);
+}
+.header img {
+  height: 50%;
+}
+.btn-menu {
+  height: 50%;
+  width: 100%;
+  background: url(./icons/menu.png) center/contain  no-repeat;
+}
+.btn-close {
+//  background: url(./icons/close2.png) center/contain  no-repeat;
+  background-image: url(./icons/close2.png);
+}
+
+.content {
+  width: 100%;
+  min-height: calc(100vh - 12vh);
+  margin-top: 12vh;
+  justify-content: center;
+//  flex-direction: column;
+}
+
+.menu {
+  display: flex;
+  width: calc(100%/3);
+  height: 88vh;
+  margin-top: 12vh;
+  position: fixed;
+  left: 0;
+  font-size: calc(1.5vh + 1.5vw);
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(60, 60, 60, 0.9);
+  cursor: default;
+  transition: left 0.4s linear;
+}
+.menu-hide {
+  left: calc(-100%/3);
+}
+
+.menu-call {
+  left: calc(100%/1.5);
+  right: 0;
+  height: auto;
+  border-radius: 0 0 0 25px;
+}
+.menu-call-hide {
+  left: 100%;
+}
+.menu-call div {
+  display: flex;
+  flex-direction: column;
+}
+.menu-call a {
+  color: lightsteelblue;
+  text-decoration: none;
+  line-height: 2;
+}
+
+.menu-content {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.menu-content div {
+  display: flex;
+  width: 100%;
+  border-bottom: 2px solid rgb(40, 40, 40);
+  justify-content: center;
+  transition:
+    transform 0.5s linear,
+    color 0.5s linear;
+}
+.menu-content div:hover {
+  color: rgb(20, 20, 20);
+  transform: scale(1.2);
+}
+
+.rbrnd span:nth-child(odd) {
+  color: rgb(230, 111, 29);
+}
+.rbrnd span:nth-child(2) {
+  color: rgb(20, 20, 20);
+}
+
+.load {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  transition: opacity 1s linear;
+  z-index: 2;
+}
