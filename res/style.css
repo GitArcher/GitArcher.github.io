@@ -71,16 +71,15 @@ body {
   height: 88vh;
   margin-top: 12vh;
   position: fixed;
-  left: 0;
   font-size: calc(1.5vh + 1.5vw);
   justify-content: center;
   align-items: center;
   background-color: rgba(60, 60, 60, 0.9);
   cursor: default;
-  transition: left 0.4s linear;
+  transition: transform 0.4s linear;
 }
 .menu-hide {
-  left: calc(-100%/3);
+  transform: translateX(-100%);
 }
 
 .menu-call {
@@ -90,7 +89,7 @@ body {
   border-radius: 0 0 0 25px;
 }
 .menu-call-hide {
-  left: 100%;
+  transform: translateX(100%);
 }
 .menu-call div {
   display: flex;
@@ -139,5 +138,4 @@ body {
   align-items: center;
   background-color: black;
   transition: opacity 1s linear;
-  z-index: 2;
 }
