@@ -1,5 +1,6 @@
 "use strict"
 window.onload = () => {
+  alert( JSON.stringify(menu.getBoundingClientRect()) )
   cacheImages("./res/photos/slideShow/", slider);
   hideMsgOfLoad();
   id = slideShowStart(slider);
@@ -159,6 +160,9 @@ btnCall.onclick = () => {
 };
 
 document.onclick = (e) => {
+  let arr = Array.from(e.path)
+  arr = arr.filter( el => el == menu )
+  alert(arr)
   let isMenuArea = e.path.some( (elem) => {
     return elem == btnMenu || elem == menu
   });
