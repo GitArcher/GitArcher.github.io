@@ -69,8 +69,10 @@ body {
   display: flex;
   width: calc(100%/3);
   height: 88vh;
-  margin-top: 12vh;
+//  margin-top: 12vh;
   position: fixed;
+  left: 0;
+  top: 12vh;
   font-size: calc(1.5vh + 1.5vw);
   justify-content: center;
   align-items: center;
