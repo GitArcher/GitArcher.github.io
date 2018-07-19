@@ -159,12 +159,13 @@ btnCall.onclick = () => {
   menuCall.classList.toggle('menu-call-hide')
 };
 
-document.onclick = (e) => {
+window.onclick = (e) => {
   let arr = Array.from(e.path)
   arr = arr.filter( el => el == menu )
-  alert(arr)
-  let isMenuArea = e.path.some( (elem) => {
+  alert(`Тута должна быть инфа --> ${arr} <--`);
+  alert(JSON.stringify(menu.getBoundingClientRect()))
+/*  let isMenuArea = e.path.some( (elem) => {
     return elem == btnMenu || elem == menu
   });
-  if (!isMenuArea) hideMenuArea();
+  if (!isMenuArea) hideMenuArea();*/
 }

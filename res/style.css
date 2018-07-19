@@ -77,6 +77,7 @@ body {
   background-color: rgba(60, 60, 60, 0.9);
   cursor: default;
   transition: transform 0.4s linear;
+  z-index: 100;
 }
 .menu-hide {
   transform: translateX(-100%);
