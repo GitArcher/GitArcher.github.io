@@ -84,7 +84,6 @@ main {
   left: calc(100%/1.5);
   right: 0;
   height: auto;
-  border-radius: 0 0 0 25px;
 }
 .menu-call-hide {
   transform: translateX(100%);
