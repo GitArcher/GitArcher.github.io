@@ -21,7 +21,7 @@
   background-color: white;
 }
 .contacts a:hover img {
-  transform: scaleX(-1);
+  transform: scale(1.2);
 }
 .contacts img {
   height: 100%;

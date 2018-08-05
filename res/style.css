@@ -16,21 +16,18 @@ body {
   font-family: hnc;
 }
 
-.header, .content {
-  width: 100%;
-  align-items: center;
-  justify-content: center;
+header {
   display: flex;
-}
-
-.header {
+  width: 100%;
   height: 12vh;
   position: fixed;
+  top: 0;
+  left: 0;
   background-color: rgb(20, 20, 20);
   font-size: calc(1.5vh + 1.5vw);
   font-family: serif;
 }
-.header > div {
+header > div {
   width: calc(100%/3);
   height: 100%;
   align-items: center;
@@ -38,13 +35,13 @@ body {
   display: flex;
   transition: background-color 0.4s linear;
 }
-.header > div:hover {
+header > div:hover {
   background-color: rgb(10, 10 ,10);
 }
 .btn-active {
   background-color: rgb(60, 60, 60);
 }
-.header img {
+header img {
   height: 50%;
 }
 .btn-menu {
@@ -57,29 +54,27 @@ body {
   background-image: url(./icons/close2.png);
 }
 
-.content {
+main {
+  display: flex;
   width: 100%;
   min-height: calc(100vh - 12vh);
   margin-top: 12vh;
   justify-content: center;
-//  flex-direction: column;
+  align-items: center;
 }
 
 .menu {
   display: flex;
   width: calc(100%/3);
   height: 88vh;
-//  margin-top: 12vh;
   position: fixed;
   left: 0;
   top: 12vh;
-  font-size: calc(1.5vh + 1.5vw);
   justify-content: center;
   align-items: center;
   background-color: rgba(60, 60, 60, 0.9);
   cursor: default;
   transition: transform 0.4s linear;
-  z-index: 100;
 }
 .menu-hide {
   transform: translateX(-100%);

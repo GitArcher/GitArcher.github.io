@@ -57,26 +57,24 @@
   position: fixed;
   top: 12vh;
   justify-content: center;
+  align-items: center;
   background-color: rgba(30, 30, 30, 0.9);
 }
 .sliderHide {
   visibility: hidden;
 }
 .slider .close {
-  width: 70px;
-  height: 70px;
-  margin-top: 25px;
-  background-image: url(./icons/close2.png);
-  background-size: contain;
+  height: 10%;
+  margin-top: 5%;
+  background: url(./icons/close2.png) center/contain no-repeat;
 }
-.slider > div {
+.slider .dir {
   display: flex;
   width: 60%;
   max-width: 900px;
   height: 80%;
-  margin-top: 120px;
+  margin-bottom: 5%;
   justify-content: center;
-  align-items: center;
   position: absolute;
   overflow: hidden;
 }
@@ -92,6 +90,7 @@
 }
 
 div.slideBtns {
+  
   justify-content: space-between;
 }
 .slideBtns div {

@@ -1,6 +1,5 @@
 "use strict"
 window.onload = () => {
-  alert( JSON.stringify(menu.getBoundingClientRect()) )
   cacheImages("./res/photos/slideShow/", slider);
   hideMsgOfLoad();
   id = slideShowStart(slider);
@@ -9,9 +8,9 @@ window.onload = () => {
 };
 let btnMenu = document.querySelector('.btn-area');
 let imgMenu = document.querySelector('.btn-menu');
-let btnCall = document.querySelectorAll('.header > div')[2];
-let logo = document.querySelectorAll('.header img')[0];
-let mains = document.querySelectorAll('.content > div:not(.main)');
+let btnCall = document.querySelectorAll('header > div')[2];
+let logo = document.querySelectorAll('header img')[0];
+let mains = document.querySelectorAll('main > div:not(.main)');
 let main = document.querySelector('.main');
 let menu = document.getElementsByClassName('menu')[0];
 let menuCall = document.getElementsByClassName('menu-call')[0];
@@ -162,10 +161,9 @@ btnCall.onclick = () => {
 window.onclick = (e) => {
   let arr = Array.from(e.path)
   arr = arr.filter( el => el == menu )
-  alert(`Тута должна быть инфа --> ${arr} <--`);
-  alert(JSON.stringify(menu.getBoundingClientRect()))
-/*  let isMenuArea = e.path.some( (elem) => {
+
+  let isMenuArea = e.path.some( (elem) => {
     return elem == btnMenu || elem == menu
   });
-  if (!isMenuArea) hideMenuArea();*/
+  if (!isMenuArea) hideMenuArea();
 }
