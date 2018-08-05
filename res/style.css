@@ -26,6 +26,7 @@ header {
   background-color: rgb(20, 20, 20);
   font-size: calc(1.5vh + 1.5vw);
   font-family: serif;
+  z-index: 10;
 }
 header > div {
   width: calc(100%/3);
@@ -81,12 +82,19 @@ main {
 }
 
 .menu-call {
-  left: calc(100%/1.5);
+  display: flex;
+  width: calc(100%/3);
+  position: fixed;
+//  left: calc(100%/1.5);
   right: 0;
-  height: auto;
+  top: 12vh;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  transition: transform 0.4s linear;
 }
 .menu-call-hide {
-  transform: translateX(100%);
+  transform: translateY(-100%);
 }
 .menu-call div {
   display: flex;
