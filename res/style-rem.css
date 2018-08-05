@@ -4,17 +4,15 @@
   padding: 25px 0;
   justify-content: center;
   flex-wrap: wrap;
-  border: 2px solid #e96e24;
-  border-radius: 25px;
-  background-color: rgb(15, 15, 15);
+//  background-color: rgb(15, 15, 15);
 }
 .main-rem div {
   display: flex;
-  width: 12em;
+  width: 100%;
+  max-width: 400px;
   flex-direction: column;
   padding: 1em;
   margin: 25px;
-  border-radius: 5px;
   background-color: rgb(30, 30, 30);
 }
 .main-rem div span:first-child {

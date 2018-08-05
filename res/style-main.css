@@ -13,8 +13,6 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  border-radius: 25px;
-  border: 2px solid #e96e24;
   opacity: 0;
   transition: opacity 1.6s cubic-bezier(0.55, 0.06, 0.68, 0.19);
   will-change: opacity;
