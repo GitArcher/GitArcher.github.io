@@ -6,10 +6,8 @@ window.onload = () => {
   initBtnsMenu();
   initBtnDirs();
 };
-let btnMenu = document.querySelector('.btn-area');
+let [btnMenu, btnLogo, btnCall] = [...document.querySelectorAll('header > div')];
 let imgMenu = document.querySelector('.btn-menu');
-let btnCall = document.querySelectorAll('header > div')[2];
-let logo = document.querySelectorAll('header img')[0];
 let mains = document.querySelectorAll('main > div:not(.main)');
 let main = document.querySelector('.main');
 let menu = document.getElementsByClassName('menu')[0];
@@ -58,20 +56,20 @@ function initBtnDirs() {
 
   };
 
-  closeSlider.onclick = () => {
+  closeSlider.onclick = (e) => {
     slider.classList.add('sliderHide');
   };
 };
 
 function createImgsInDiv(path, arr, parent) {
-    let div;
-    for (let name of arr) {
-      div = document.createElement('div');
-      div.style.backgroundImage = `url(${path+name})`;
-      div.classList.add('slideImg', 'backSlide');
-      parent.appendChild(div);
-    };
-    div.style.transform = 'translateX(0)';
+  let img;
+  for (let name of arr) {
+    img = document.createElement('img');
+    img.src = `${path+name}`;
+    img.classList.add('slideImg', 'backSlide');
+    parent.appendChild(img);
+  };
+  img.style.transform = 'translateX(0)';
 };
 
 function slideInit(dirImg) {
@@ -145,7 +143,8 @@ btnMenu.onclick = () => {
   menu.classList.toggle('menu-hide');
 };
 
-logo.onclick = () => {
+btnLogo.onclick = () => {
+  console.log(lastClickedEl);
   lastClickedEl.style.display = "none";
   main.style.display = "flex";
   lastClickedEl = main;
@@ -154,7 +153,7 @@ logo.onclick = () => {
 };
 
 btnCall.onclick = () => {
-  btnCall.classList.toggle('btn-active');
+  btnCall.classList.toggle('btn-call-active');
   menuCall.classList.toggle('menu-call-hide')
 };
 
