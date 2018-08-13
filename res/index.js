@@ -57,9 +57,11 @@ function initBtnDirs() {
   };
 
   slider.onclick = (e) => {
+    alert(e.path[0]);
     e.path[0] == slider ? slider.classList.add('sliderHide') : null;
   };
-  closeSlider.onclick = () => {
+  closeSlider.onclick = (e) => {
+    alert(e.path[0]);
     slider.classList.add('sliderHide');
   };
 };
