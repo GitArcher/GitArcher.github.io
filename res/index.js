@@ -56,7 +56,10 @@ function initBtnDirs() {
 
   };
 
-  closeSlider.onclick = (e) => {
+  slider.onclick = (e) => {
+    e.path[0] == slider ? slider.classList.add('sliderHide') : null;
+  };
+  closeSlider.onclick = () => {
     slider.classList.add('sliderHide');
   };
 };
@@ -70,6 +73,7 @@ function createImgsInDiv(path, arr, parent) {
     parent.appendChild(img);
   };
   img.style.transform = 'translateX(0)';
+  img.style.position = 'relative';
 };
 
 function slideInit(dirImg) {
@@ -81,16 +85,22 @@ function slideInit(dirImg) {
     next: () => {
       if (!leftImgs.length || new Date() - time < 600) return;
       visibleImg.style.transform = 'translateX(-100.1%)';
+      visibleImg.style.position = 'absolute';
       rightImgs.push(visibleImg);
+
       visibleImg = leftImgs.pop();
+      visibleImg.style.position = 'relative';
       visibleImg.style.transform = 'translateX(0)';
       time = new Date();
     },
     back: () => {
       if (!rightImgs.length || new Date() - time < 600) return;
+      visibleImg.style.position = 'absolute';
       visibleImg.style.transform = 'translateX(100.1%)';
       leftImgs.push(visibleImg);
+
       visibleImg = rightImgs.pop();
+      visibleImg.style.position = 'relative';
       visibleImg.style.transform = 'translateX(0)';
       time = new Date();
     },
