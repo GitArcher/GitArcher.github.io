@@ -1,11 +1,4 @@
 "use strict"
-window.onload = () => {
-  cacheImages("./res/photos/slideShow/", slider);
-  hideMsgOfLoad();
-  id = slideShowStart(slider);
-  initBtnsMenu();
-  initBtnDirs();
-};
 let [btnMenu, btnLogo, btnCall] = [...document.querySelectorAll('header > div')];
 let imgMenu = document.querySelector('.btn-menu');
 let mains = document.querySelectorAll('main > div:not(.main)');
@@ -27,6 +20,14 @@ let dirsImg = [
 ];
 let id, img = [];
 let lastClickedEl;
+
+cacheImages("./res/photos/slideShow/", slider);
+window.onload = () => {
+  hideMsgOfLoad();
+  id = slideShowStart(slider);
+  initBtnsMenu();
+  initBtnDirs();
+};
 
 function cacheImages(path, arr) {
   for (let i = 0; i < arr.length; i++) {
