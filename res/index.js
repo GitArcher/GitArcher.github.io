@@ -45,10 +45,10 @@ function initBtnDirs() {
 
     dirsBtn[i].onclick = () => {
       for (let dir of dirs) {
-        dir.classList.add('sliderHide');
+        dir.classList.add('hide');
       };
-      slider.classList.toggle('sliderHide');
-      dirs[i].classList.remove('sliderHide');
+      slider.classList.toggle('hide');
+      dirs[i].classList.remove('hide');
 
       slideBtns[0].onclick = slide.back;
       slideBtns[1].onclick = slide.next;
@@ -57,12 +57,12 @@ function initBtnDirs() {
   };
 
   slider.onclick = (e) => {
-    alert(e.path[0]);
-    e.path[0] == slider ? slider.classList.add('sliderHide') : null;
+//    alert(e.path[0]);
+    e.path[0] == slider ? slider.classList.add('hide') : null;
   };
   closeSlider.onclick = (e) => {
-    alert(e.path[0]);
-    slider.classList.add('sliderHide');
+//    alert(e.path[0]);
+    slider.classList.add('hide');
   };
 };
 

@@ -60,7 +60,7 @@
   background-color: rgba(30, 30, 30, 0.9);
   z-index: 2;
 }
-.sliderHide {
+.hide {
   visibility: hidden;
 }
 .slider .close {
