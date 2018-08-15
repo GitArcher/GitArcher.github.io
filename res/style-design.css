@@ -92,9 +92,8 @@ div.slideBtns {
   display: flex;
   width: 80%;
   max-width: 900px;
-  height: 80%;
+  height: auto;
   position: absolute;
-  margin-bottom: 5%;
   justify-content: space-between;
   align-items: center;
 }
