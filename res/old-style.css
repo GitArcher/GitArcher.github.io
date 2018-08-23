@@ -1,0 +1,30 @@
+body {
+  font-size: 12px;
+}
+
+header {
+  height: 60px;
+  text-align: center;
+  white-space: nowrap;
+}
+header div {
+  display: inline-block;
+  width: 33.333%;
+}
+header img {
+  position: relative;
+  top: 25%;
+}
+
+.menu {
+  width: 33.333%;
+  height: auto;
+  top: 60px;
+  text-align: center;
+}
+.menu-content {
+  display: inline-block;
+}
+.menu-content div {
+  text-align: center;
+}

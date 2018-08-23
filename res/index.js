@@ -1,6 +1,6 @@
 "use strict"
 let [btnMenu, btnLogo, btnCall] = [...document.querySelectorAll('header > div')];
-let imgMenu = document.querySelector('.btn-menu');
+let imgMenu = document.querySelector('header img');
 let mains = document.querySelectorAll('main > div:not(.main)');
 let main = document.querySelector('.main');
 let menu = document.getElementsByClassName('menu')[0];
@@ -9,7 +9,7 @@ let menuList = document.querySelectorAll('.menu-content div');
 let content = document.getElementsByClassName('content')[0];
 let slideBtns = document.querySelectorAll('.slideBtns div');
 let closeSlider = document.querySelector('.close');
-let dirs = document.querySelectorAll('.dir');
+let dir = document.querySelector('.dir');
 let msgOfLoad = document.querySelector('.load');
 let slider = ["View1.jpg","View3.jpg","bedroom2.1.jpg","bedroom2.3.jpg"];
 let dirsImg = [
@@ -40,34 +40,25 @@ function initBtnDirs() {
   let dirsBtn = document.querySelectorAll('.dirs div');
   let slider = document.querySelector('.slider');
 
-  for (let i = 0; i < dirs.length; i++) {
-    createImgsInDiv(`./res/photos/dir${i+1}/`, dirsImg[i], dirs[i]);
-    let slide = slideInit(dirs[i].childNodes);
-
+  for (let i = 0; i < dirsBtn.length; i++) {
     dirsBtn[i].onclick = () => {
-      for (let dir of dirs) {
-        dir.classList.add('hide');
-      };
+      createImgsInDiv(`./res/photos/dir${i+1}/`, dirsImg[i], dir);
       slider.classList.toggle('hide');
-      dirs[i].classList.remove('hide');
 
+      let slide = slideInit(dir.childNodes);
+      initTouchSlider(slide);
       slideBtns[0].onclick = slide.back;
       slideBtns[1].onclick = slide.next;
     };
+  }
 
-  };
-
-  slider.onclick = (e) => {
-//    alert(e.path[0]);
-    e.path[0] == slider ? slider.classList.add('hide') : null;
-  };
   closeSlider.onclick = (e) => {
-//    alert(e.path[0]);
     slider.classList.add('hide');
   };
 };
 
 function createImgsInDiv(path, arr, parent) {
+  dir.innerHTML = null;
   let img;
   for (let name of arr) {
     img = document.createElement('img');
@@ -84,6 +75,7 @@ function slideInit(dirImg) {
   let visibleImg = leftImgs.pop();
   let rightImgs = [];
   let time = 0;
+//  initTouchSlider();
   return {
     next: () => {
       if (!leftImgs.length || new Date() - time < 600) return;
@@ -109,6 +101,24 @@ function slideInit(dirImg) {
     },
   };
 };
+
+function initTouchSlider(slide) {
+  let x, startX;
+  console.log(slide.visibleImg);
+  function touchStart(e) {
+    startX = e.touches[0].clientX;
+    console.log(startX);
+    setInterval( () => {
+
+    }, 200);
+  };
+  function touchMove() {
+
+  };
+  function touchEnd() {
+
+  };
+}
 
 function initBtnsMenu() {
   lastClickedEl = main;
@@ -145,19 +155,22 @@ function hideMsgOfLoad() {
 }
 
 function hideMenuArea() {
-  imgMenu.classList.remove('btn-close');
   btnMenu.classList.remove('btn-active');
   menu.classList.add('menu-hide');
-}
-
-btnMenu.onclick = () => {
-  imgMenu.classList.toggle('btn-close');
-  btnMenu.classList.toggle('btn-active');
-  menu.classList.toggle('menu-hide');
+  imgMenu.src = './res/icons/menu.png';
 };
 
+btnMenu.onclick = () => {
+  btnMenu.classList.toggle('btn-active');
+  menu.classList.toggle('menu-hide');
+  if (imgMenu.getAttribute('src') == "./res/icons/menu.png") {
+    imgMenu.src = './res/icons/close2.png';
+  } else {
+    imgMenu.src = './res/icons/menu.png';
+  };
+}
+
 btnLogo.onclick = () => {
-  console.log(lastClickedEl);
   lastClickedEl.style.display = "none";
   main.style.display = "flex";
   lastClickedEl = main;

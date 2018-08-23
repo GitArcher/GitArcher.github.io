@@ -16,23 +16,20 @@ header {
   display: flex;
   width: 100%;
   height: 12vh;
-  max-height: 100px;
   position: fixed;
   top: 0;
   left: 0;
   background-color: rgb(20, 20, 20);
-  font-size: calc(1.5vh + 1.5vw);
-  font-family: serif;
   z-index: 1;
 }
-header > div {
+header div {
   display: flex;
   width: calc(100%/3);
-  min-width: 33.333%;
   height: 100%;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   transition: background-color 0.4s linear;
+  cursor: pointer;
 }
 header > div:hover {
   background-color: rgb(10, 10 ,10);
@@ -42,15 +39,6 @@ header > div:hover {
 }
 header img {
   height: 50%;
-}
-.btn-menu {
-  height: 50%;
-  width: 100%;
-  background: url(./icons/menu.png) center/contain  no-repeat;
-}
-.btn-close {
-//  background: url(./icons/close2.png) center/contain  no-repeat;
-  background-image: url(./icons/close2.png);
 }
 
 main {
@@ -70,9 +58,8 @@ main {
   left: 0;
   top: 12vh;
   justify-content: center;
-  align-items: center;
   background-color: rgba(60, 60, 60, 0.9);
-  cursor: default;
+  cursor: pointer;
   transition: transform 0.4s linear;
 }
 .menu-hide {
