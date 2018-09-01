@@ -45,8 +45,9 @@ function initBtnDirs() {
       createImgsInDiv(`./res/photos/dir${i+1}/`, dirsImg[i], dir);
       slider.classList.toggle('hide');
 
-      let slide = slideInit(dir.childNodes);
+      let slide = new Slide(dir.childNodes);
       initTouchSlider(slide);
+
       slideBtns[0].onclick = slide.back;
       slideBtns[1].onclick = slide.next;
     };
@@ -60,68 +61,116 @@ function initBtnDirs() {
 function createImgsInDiv(path, arr, parent) {
   dir.innerHTML = null;
   let img;
+
   for (let name of arr) {
     img = document.createElement('img');
     img.src = `${path+name}`;
-    img.classList.add('slideImg', 'backSlide');
+    img.classList.add('slideImg', 'animate');
     parent.appendChild(img);
   };
+
   img.style.transform = 'translateX(0)';
   img.style.position = 'relative';
 };
 
-function slideInit(dirImg) {
-  let leftImgs = Array.from(dirImg);
-  let visibleImg = leftImgs.pop();
-  let rightImgs = [];
-  let time = 0;
-//  initTouchSlider();
-  return {
-    next: () => {
-      if (!leftImgs.length || new Date() - time < 600) return;
-      visibleImg.style.transform = 'translateX(-100.1%)';
-      visibleImg.style.position = 'absolute';
-      rightImgs.push(visibleImg);
+function Slide(dirImg) {
+  this.rightImgs = Array.from(dirImg);
+  this.visibleImg = this.rightImgs.pop();
+  this.leftImgs = [];
+  this.time = 0;
 
-      visibleImg = leftImgs.pop();
-      visibleImg.style.position = 'relative';
-      visibleImg.style.transform = 'translateX(0)';
-      time = new Date();
-    },
-    back: () => {
-      if (!rightImgs.length || new Date() - time < 600) return;
-      visibleImg.style.position = 'absolute';
-      visibleImg.style.transform = 'translateX(100.1%)';
-      leftImgs.push(visibleImg);
+  this.next = () => {
+    if (!this.rightImgs.length || (Date.now() - this.time) < 600) return;
+    this.visibleImg.style.position = 'absolute';
+    this.visibleImg.style.transform = 'translateX(-100.1%)';
+    this.leftImgs.push(this.visibleImg);
 
-      visibleImg = rightImgs.pop();
-      visibleImg.style.position = 'relative';
-      visibleImg.style.transform = 'translateX(0)';
-      time = new Date();
-    },
+    this.visibleImg = this.rightImgs.pop();
+    this.visibleImg.style.position = 'relative';
+    this.visibleImg.style.transform = 'translateX(0)';
+    this.time = Date.now();
+  };
+
+  this.back = () => {
+    if (!this.leftImgs.length || (Date.now() - this.time) < 600) return;
+    this.visibleImg.style.transform = 'translateX(100.1%)';
+    this.visibleImg.style.position = 'absolute';
+    this.rightImgs.push(this.visibleImg);
+
+    this.visibleImg = this.leftImgs.pop();
+    this.visibleImg.style.position = 'relative';
+    this.visibleImg.style.transform = 'translateX(0)';
+    this.time = Date.now();
   };
 };
 
 function initTouchSlider(slide) {
-  let x, startX;
-  console.log(slide.visibleImg);
-  function touchStart(e) {
+  let x = 0, startX, widthContent,
+      lastItmR, lastItmL,
+      requestID, intervalID;
+
+  dir.ontouchstart = (e) => {
+    widthContent = parseInt( getComputedStyle(dir).width );
+    lastItmR = slide.rightImgs.length - 1;
+    lastItmL = slide.leftImgs.length - 1;
     startX = e.touches[0].clientX;
-    console.log(startX);
-    setInterval( () => {
+    console.log(slide.leftImgs.length);
 
+    slide.visibleImg.classList.remove('animate');;
+
+    intervalID = setInterval( () => {
+      if (x < 0 && slide.rightImgs.length) {
+        slide.visibleImg.style.position = 'absolute';
+        slide.rightImgs[lastItmR].classList.remove('animate');
+        slide.rightImgs[lastItmR].style.position = 'relative';
+      };
+      if (x > 0 && slide.leftImgs.length) {
+        if (slide.rightImgs.length) slide.rightImgs[lastItmR].style.position = 'absolute';
+        slide.visibleImg.style.position = 'absolute';
+
+        slide.leftImgs[lastItmL].classList.remove('animate');
+        slide.leftImgs[lastItmL].style.position = 'relative';
+      };
     }, 200);
-  };
-  function touchMove() {
 
-  };
-  function touchEnd() {
+    (function step () {
+      if (x < 0 && slide.rightImgs.length) {
+        slide.visibleImg.style.transform = `translateX(${x}px)`;
+        slide.rightImgs[lastItmR].style.transform = `translateX(${widthContent + x}px)`;
+      };
+      if (x > 0 && slide.leftImgs.length) {
+        slide.visibleImg.style.transform = `translateX(${x}px)`;
+        slide.leftImgs[lastItmL].style.transform = `translateX(${-widthContent + x}px)`;
+      };
 
+      requestID = requestAnimationFrame(step);
+    })()
+  };
+
+  dir.ontouchmove = (e) => {
+    e.preventDefault();
+    x = Math.round(e.touches[0].clientX - startX);
+  };
+
+  dir.ontouchend = () => {
+    window.cancelAnimationFrame(requestID);
+    window.clearInterval(intervalID);
+
+    slide.visibleImg.classList.add('animate');
+    if ( (x/widthContent <= -0.25) && slide.rightImgs.length ) {
+      slide.rightImgs[lastItmR].classList.add('animate');
+      slide.next();
+    };
+    if ( (x/widthContent >= 0.25) && slide.leftImgs.length ) {
+      slide.leftImgs[lastItmL].classList.add('animate');
+      slide.back();
+    };
   };
 }
 
 function initBtnsMenu() {
   lastClickedEl = main;
+
   for (let i = 0; i < menuList.length; i++) {
     menuList[i].onclick = () => {
       lastClickedEl.style.display = "none";
@@ -139,12 +188,13 @@ function slideShowStart (arr) {
   let imgs = document.querySelectorAll('.main div')
   let i = 1;
   let lastI = imgs[0];
-    return setInterval( () => {
-      lastI.classList.remove('show');
-      imgs[i].classList.add('show');
-      lastI = imgs[i];
-      ++i == 4 ? i = 0 : null;
-    }, 6000);
+
+  return setInterval( () => {
+    lastI.classList.remove('show');
+    imgs[i].classList.add('show');
+    lastI = imgs[i];
+    ++i == 4 ? i = 0 : null;
+  }, 6000);
 };
 
 function hideMsgOfLoad() {
