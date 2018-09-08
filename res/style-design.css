@@ -74,49 +74,39 @@
   width: 8vh;
   height: 8vh;
 }
-.slider .dir {
-  display: flex;
+.slider #VP-slides {
   width: 80%;
-  max-width: 900px;
   height: auto;
+  max-width: 900px;
   max-height: 70%;
-  align-items: center;
-  position: absolute;
   overflow: hidden;
 }
-
-.slideImg {
-  width: 100%;
-  position: absolute;
-  transform: translateX(100%);
+.slider .dir {
+  display: flex;
+  width: auto;
+  height: auto;
+  align-items: center;
 }
+
 .animate {
   transition: transform 0.4s linear;
   will-change: transform;
 }
 
-div.slideBtns {
-  display: flex;
-  width: 80%;
-  max-width: 900px;
-  height: auto;
-  position: absolute;
-  justify-content: space-between;
-  align-items: center;
-}
-.slideBtns div {
+.slideBtns {
   width: 12vmin;
   height: 12vmin;
+  position: absolute;
   background-size: 60%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.slideBtns div:first-child {
-  margin-left: 5px;
+.slideBtns.back {
+  left: 11vw;
   background-image: url(./icons/back.svg);
 }
-.slideBtns div:last-child {
-  margin-right: 5px;
+.slideBtns.next {
+  right: 11vw;
   background-image: url(./icons/next.svg);
 }
