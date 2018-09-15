@@ -59,30 +59,46 @@ main {
   top: 12vh;
   justify-content: center;
   background-color: rgba(60, 60, 60, 0.9);
-  cursor: pointer;
-  transition: transform 0.4s linear;
 }
-.menu-hide {
+.left-hide {
   transform: translateX(-100%);
+}
+.menu-content div {
+  display: flex;
+  width: 100%;
+  border-bottom: 2px solid rgb(40, 40, 40);
+  justify-content: center;
+  transition:
+    transform 0.5s linear,
+    color 0.5s linear;
+  cursor: pointer;
+}
+.menu-content div:hover {
+  color: rgb(20, 20, 20);
+  transform: scale(1.2);
+}
+
+.rbrnd span:nth-child(odd) {
+  color: rgb(230, 111, 29);
+}
+.rbrnd span:nth-child(2) {
+  color: rgb(20, 20, 20);
 }
 
 .menu-call {
   display: flex;
   width: calc(100%/3);
   position: fixed;
-//  left: calc(100%/1.5);
   right: 0;
   top: 12vh;
   justify-content: center;
   align-items: center;
-  cursor: default;
-  transform-origin: top;
   transition: transform 0.4s linear;
 }
 .btn-call-active {
   background-color: rgb(10, 10, 10);
 }
-.menu-call-hide {
+.top-hide {
   transform: translateY(-100%);
 }
 .menu-call div {
@@ -93,7 +109,7 @@ main {
   color: lightsteelblue;
   font-size: calc(1.2vh + 1.2vw);
   text-decoration: none;
-  line-height: 2;
+  line-height: 3;
   text-shadow:
     1px 1px 1px black,
     -1px -1px 1px black,
@@ -107,26 +123,6 @@ main {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-}
-.menu-content div {
-  display: flex;
-  width: 100%;
-  border-bottom: 2px solid rgb(40, 40, 40);
-  justify-content: center;
-  transition:
-    transform 0.5s linear,
-    color 0.5s linear;
-}
-.menu-content div:hover {
-  color: rgb(20, 20, 20);
-  transform: scale(1.2);
-}
-
-.rbrnd span:nth-child(odd) {
-  color: rgb(230, 111, 29);
-}
-.rbrnd span:nth-child(2) {
-  color: rgb(20, 20, 20);
 }
 
 .load {

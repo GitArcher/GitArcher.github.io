@@ -3,15 +3,14 @@ let [btnMenu, btnLogo, btnCall] = [...document.querySelectorAll('header > div')]
 let imgMenu = document.querySelector('header img');
 let mains = document.querySelectorAll('main > div:not(.main)');
 let main = document.querySelector('.main');
-let menu = document.getElementsByClassName('menu')[0];
+let menu = document.querySelector('.menu');
 let menuCall = document.getElementsByClassName('menu-call')[0];
 let menuList = document.querySelectorAll('.menu-content div');
 let content = document.getElementsByClassName('content')[0];
-let slideBtns = document.querySelectorAll('.slideBtns');
 let closeSlider = document.querySelector('.close');
 let dir = document.querySelector('.dir');
 let msgOfLoad = document.querySelector('.load');
-let slider = ["View1.jpg","View3.jpg","bedroom2.1.jpg","bedroom2.3.jpg"];
+let slideShowImgs = ["View1.jpg","View3.jpg","bedroom2.1.jpg","bedroom2.3.jpg"];
 let dirsImg = [
   ["b1.jpg","b2.jpg","k1.jpg","k2.jpg","k3.jpg","lr1.jpg","lr2.jpg"],
   ["bedroom2.1.jpg","bedroom2.3.jpg","bedroom2.4.jpg"],
@@ -21,12 +20,14 @@ let dirsImg = [
 let id, img = [];
 let lastClickedEl;
 
-cacheImages("./res/photos/slideShow/", slider);
+//cacheImages("./res/photos/slideShow/", slideShowImgs);
 window.onload = () => {
   hideMsgOfLoad();
-  id = slideShowStart(slider);
+  id = slideShowStart(slideShowImgs);
   initBtnsMenu();
   initBtnDirs();
+  SliderInit();
+//  initSwipeMenu();
 };
 
 function cacheImages(path, arr) {
@@ -43,19 +44,8 @@ function initBtnDirs() {
   for (let i = 0; i < dirsBtn.length; i++) {
     dirsBtn[i].onclick = () => {
       createImgsInDiv(`./res/photos/dir${i+1}/`, dirsImg[i], dir);
-      slider.classList.toggle('hide');
-// FIXME:
-      let slide = new Slide(dir);
-      initTouchSlider(slide);
-
-      slideBtns[0].onclick = slide.back;
-      slideBtns[1].onclick = slide.next;
+      slider.classList.remove('hide');
     };
-  };
-
-  closeSlider.onclick = (e) => {
-    slider.classList.add('hide');
-    dir.style.transform = 'translateX(0)';
   };
 };
 
@@ -73,30 +63,43 @@ function createImgsInDiv(path, arr, parent) {
   };
 };
 
-function Slide(dir) {
+function SliderInit() {
+  let slider = document.querySelector('.slider');
   dir.translateX = 0;
   dir.step = 1;
-  dir.steps = dir.childElementCount;
-  dir.rate = 100/dir.steps;
+  dir.steps = () => dir.childElementCount;
+  dir.rate = () => 100/dir.childElementCount;
 
-  this.next = () => {
-    if (dir.step !== dir.steps) {
-      dir.translateX -= dir.rate;
+  slider.next = () => {
+    if ( dir.step !== dir.steps() ) {
+      dir.translateX -= dir.rate();
       dir.style.transform = `translateX(${dir.translateX}%)`;
       dir.step++
     };
   };
 
-  this.back = () => {
+  slider.back = () => {
     if (dir.step !== 1) {
-      dir.translateX += dir.rate;
+      dir.translateX += dir.rate();
       dir.style.transform = `translateX(${dir.translateX}%)`;
       dir.step--;
     };
   };
+
+  document.querySelector('#btnBack').onclick = slider.back;
+  document.querySelector('#btnNext').onclick = slider.next;
+
+  closeSlider.onclick = (e) => {
+    dir.translateX = 0;
+    dir.step = 1;
+    slider.classList.add('hide');
+    dir.style.transform = 'translateX(0)';
+  };
+
+  initSwapSlide(slider)
 };
 
-function initTouchSlider(slide) {
+function initSwapSlide(slider) {
   let x, startX, requestID;
 
   dir.ontouchstart = (e) => {
@@ -127,10 +130,10 @@ function initTouchSlider(slide) {
     dir.classList.add('animate');
 
     if (x > 0) {
-      slide.back();
+      slider.back();
     };
     if (x < 0) {
-      slide.next();
+      slider.next();
     };
   };
 };
@@ -149,6 +152,47 @@ function initBtnsMenu() {
       menuList[i] == menuList[0] ? id = slideShowStart(slider) : null;
     };
   };
+};
+
+function initSwipeMenu() {
+  let x, startX, requestID;
+
+  window.addEventListener('touchstart', (e) => {
+    x = 0;
+    startX = e.touches[0].clientX;
+
+    if (startX/innerWidth < 0.06 && menu.classList.contains('left-hide')) {
+      menu.translateX = -innerWidth/3;
+      menu.classList.remove('animate');
+
+      (function step() {
+        if (x < innerWidth/3) {
+          menu.style.transform = `translateX(${x + menu.translateX}px)`;
+          requestID = requestAnimationFrame(step);
+        };
+      })();
+    };
+  });
+  menu.addEventListener('touchstart', (e) => {
+    if (!menu.classList.contains('left-hide')) {
+      menu.classList.remove('animate');
+
+    };
+  });
+
+  window.addEventListener('touchmove', (e) => {
+//    e.preventDefault();
+    x = Math.round(e.touches[0].clientX - startX);
+  });
+
+  window.addEventListener('touchend', () => {
+    cancelAnimationFrame(requestID);
+    menu.style.removeProperty('transform');
+    menu.classList.add('animate');
+    if (x > startX) {
+      menu.classList.remove('left-hide');
+    };
+  });
 };
 
 function slideShowStart (arr) {
@@ -173,13 +217,13 @@ function hideMsgOfLoad() {
 
 function hideMenuArea() {
   btnMenu.classList.remove('btn-active');
-  menu.classList.add('menu-hide');
+  menu.classList.add('left-hide');
   imgMenu.src = './res/icons/menu.png';
 };
 
 btnMenu.onclick = () => {
   btnMenu.classList.toggle('btn-active');
-  menu.classList.toggle('menu-hide');
+  menu.classList.toggle('left-hide');
   if (imgMenu.getAttribute('src') == "./res/icons/menu.png") {
     imgMenu.src = './res/icons/close2.png';
   } else {
@@ -197,15 +241,15 @@ btnLogo.onclick = () => {
 
 btnCall.onclick = () => {
   btnCall.classList.toggle('btn-call-active');
-  menuCall.classList.toggle('menu-call-hide')
+  menuCall.classList.toggle('top-hide')
 };
 
 window.onclick = (e) => {
   let arr = Array.from(e.path)
   arr = arr.filter( el => el == menu )
 
-  let isMenuArea = e.path.some( (elem) => {
-    return elem == btnMenu || elem == menu
+  let isMenuArea = e.path.some( elem => {
+    return elem == btnMenu || elem == menu;
   });
   if (!isMenuArea) hideMenuArea();
-}
+};
