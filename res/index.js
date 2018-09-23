@@ -42,9 +42,10 @@ function lazyImgs() {
   let imgs = document.querySelectorAll('img[data-src]');
   for (let img of imgs) {
     img.src = img.getAttribute('data-src');
-    console.log(img.src);
-    img.removeAttribute('data-src');
-  }
+    img.onload = () => {
+      img.removeAttribute('data-src');
+    };
+  };
 };
 
 function initBtnDirs() {
