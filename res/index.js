@@ -196,7 +196,7 @@ function initSwipeMenu() {
 };
 
 function slideShowStart (arr) {
-  let imgs = document.querySelectorAll('.main div')
+  let imgs = document.querySelectorAll('.main img')
   let i = 1;
   let lastI = imgs[0];
 

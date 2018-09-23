@@ -1,34 +1,25 @@
 .main {
-  width: 100%;
-  height: calc( 80*(100vh - 12vh)/100  );
-  position: relative;
   display: flex;
-  justify-content: center;
-}
-.main div {
   width: 85%;
-  max-width: calc( 2*(80*(100vh - 12vh)/100) );
+  max-width: 1200px;
+  height: 80vh;
+  max-height: 750px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+.main img {
   height: 100%;
+  width: 100%;
+  object-fit: cover;
   position: absolute;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
   opacity: 0;
-  transition: opacity 1.6s cubic-bezier(0.55, 0.06, 0.68, 0.19);
+  transition: opacity 1.6s;
   will-change: opacity;
 }
-.main div.show {
+.main img[data-src] {
+  filter: blur(1vw);
+}
+.main img.show {
   opacity: 1;
-}
-.main div:nth-child(1) {
-  background-image: url(./photos/slideShow/bedroom2.3.jpg);
-}
-.main div:nth-child(2) {
-  background-image: url(./photos/slideShow/bedroom2.1.jpg);
-}
-.main div:nth-child(3) {
-  background-image: url(./photos/slideShow/View3.jpg);
-}
-.main div:nth-child(4) {
-  background-image: url(./photos/slideShow/View1.jpg);
 }
