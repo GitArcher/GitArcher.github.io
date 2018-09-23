@@ -23,6 +23,7 @@ let lastClickedEl;
 //cacheImages("./res/photos/slideShow/", slideShowImgs);
 window.onload = () => {
   hideMsgOfLoad();
+  lazyImgs();
   id = slideShowStart(slideShowImgs);
   initBtnsMenu();
   initBtnDirs();
@@ -35,6 +36,15 @@ function cacheImages(path, arr) {
     img.push(document.createElement('img'));
     img[i].src = path+arr[i];
   };
+};
+
+function lazyImgs() {
+  let imgs = document.querySelectorAll('img[data-src]');
+  for (let img of imgs) {
+    img.src = img.getAttribute('data-src');
+    console.log(img.src);
+    img.removeAttribute('data-src');
+  }
 };
 
 function initBtnDirs() {
