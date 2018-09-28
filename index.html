@@ -7,11 +7,11 @@
     <title>Rebrand</title>
 <!--    <link rel="stylesheet" href="./res/old-style.css">-->
     <link rel="stylesheet" href="./res/style.css">
-    <link rel="stylesheet" href="./res/style-main.css">
-    <link rel="stylesheet" href="./res/style-about.css">
-    <link rel="stylesheet" href="./res/style-rem.css">
-    <link rel="stylesheet" href="./res/style-design.css">
-    <link rel="stylesheet" href="./res/style-contacts.css">
+    <link rel="stylesheet" href="./pages/main/style.css">
+    <link rel="stylesheet" href="./pages/about/style.css">
+    <link rel="stylesheet" href="./pages/services/style.css">
+    <link rel="stylesheet" href="./pages/portfolio/style.css">
+    <link rel="stylesheet" href="./pages/contacts/style.css">
   </head>
 
   <body>
@@ -25,12 +25,12 @@
         </div>
 
         <div class="">
-          <img src="./res/icons/call.png" alt="CALL">
+          <img src="./res/icons/call.svg" alt="CALL">
         </div>
       </header>
 
       <main>
-        <div class="main">
+        <div class="main visible">
           <img src="./res/photos/slideShow/low-bedroom2.3.jpg" data-src="./res/photos/slideShow/bedroom2.3.jpg" class="show"></img>
           <img src="./res/photos/slideShow/low-bedroom2.1.jpg" data-src="./res/photos/slideShow/bedroom2.1.jpg" class=""></img>
           <img src="./res/photos/slideShow/low-View3.jpg" data-src="./res/photos/slideShow/View3.jpg" class=""></img>
@@ -92,10 +92,10 @@
 
         <div class="design-main">
           <div class="dirs">
-            <div class="img1"></div>
-            <div class="img2"></div>
-            <div class="img3"></div>
-            <div class="img4"></div>
+            <img src="./res/photos/dir1/k2.jpg"></img>
+            <img src="./res/photos/dir2/bedroom2.3.jpg"></img>
+            <img src="./res/photos/dir3/gostinaya2.jpg"></img>
+            <img src="./res/photos/dir4/View1.jpg"></img>
           </div>
 
           <div class="slider hide">
@@ -135,6 +135,8 @@
         </div>
       </main>
 
+      <div id="close" class="none" onclick="hideMenu()"></div>
+
       <nav class="menu left-hide animate">
         <div class="menu-content">
           <div class="rbrnd point">
@@ -166,6 +168,8 @@
         <span>LOADING</span>
       </div>
 
+      <script src="./pages/main/slideShow.js"></script>
+      <script src="./pages/portfolio/slider.js"></script>
       <script src="./res/index.js"></script>
   </body>
 </html>

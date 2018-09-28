@@ -2,7 +2,7 @@
   display: none;
   width: 70%;
 //  background-color: dimgray;
-  background: url(./icons/logo.svg) center/contain no-repeat;
+  background: url(/res/icons/logo.svg) center/contain no-repeat;
 }
 .main-about div {
   display: flex;

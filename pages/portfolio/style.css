@@ -1,4 +1,4 @@
-.dirs div:hover {
+.dirs img:hover {
   transform: scale(1.2, 1.2);
 //  box-shadow: 0px 0px 20px 14px black;
 }
@@ -18,7 +18,7 @@
   flex-wrap: wrap;
 //  background-color: rgb(15, 15, 15);
 }
-.dirs div {
+.dirs img {
   display: flex;
   width: 22vw;
   min-width: 200px;
@@ -28,24 +28,10 @@
   max-height: 260px;
   margin: 25px;
   border-radius: 5px;
-  background-size: cover;
-  background-position: center;
-//  box-shadow: 0 0 20px 10px black;
+  object-fit: cover;
   transition:
     transform 1.4s cubic-bezier(0.68, -0.55, 0.27, 1.55),
     box-shadow 1.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
-.img1 {
-  background: url(./photos/dir1/k2.jpg), black;
-}
-.img2 {
-  background: url(./photos/dir2/bedroom2.3.jpg), black;
-}
-.img3 {
-  background: url(./photos/dir3/gostinaya2.jpg), black;
-}
-.img4 {
-  background: url(./photos/dir4/View1.jpg), black;
 }
 
 .slider {
@@ -70,31 +56,31 @@
   transform: scale(1.2);
 }
 .slider .close {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: black;
   position: fixed;
   transition: background-color 0.4s linear;
 }
 .slider .close img {
-  width: 8%;
+  height: 8%;
   position: absolute;
   top: 0;
-  left: 46%;
+  left: calc(50% - 4vh);
   transition: transform 0.4s linear;
 }
 
 .slider #VP-slides {
   width: 80%;
   max-height: 650px;
-  max-width: 900px;
+  max-width: 850px;
   position: relative;
   overflow: hidden;
 }
-@media (orientation: landscape) {
+@media (orientation: landscape) and (max-device-width: 900px) {
   .slider .close img {
-    top: 46%;
-    right: 0;
+    top: 45%;
+    left: 90%;
   }
   .slider #VP-slides {
     width: 70%;
@@ -107,7 +93,6 @@
 }
 .animate {
   transition: transform 0.4s linear;
-  will-change: transform;
 }
 
 .sliderBtns:hover {
@@ -116,7 +101,7 @@
 .sliderBtns {
   width: 6%;
   position: absolute;
-  top: 44%;
+  top: 46%;
   transition: transform 0.4s linear;
 }
 .slider #btnBack {
