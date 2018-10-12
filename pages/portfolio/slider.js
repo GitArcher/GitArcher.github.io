@@ -43,20 +43,19 @@ function SliderInit() {
 
   dir.translateX = 0;
   dir.step = 1;
-  dir.steps = () => dir.childElementCount;
-  dir.rate = () => 100/dir.childElementCount;
+  dir.getRate = () => 100/dir.childElementCount;
 
   slider.next = () => {
-    if ( dir.step !== dir.steps() ) {
-      dir.translateX -= dir.rate();
+    if ( dir.step < dir.childElementCount ) {
+      dir.translateX -= dir.getRate();
       dir.style.transform = `translateX(${dir.translateX}%)`;
       dir.step++
     };
   };
 
   slider.back = () => {
-    if (dir.step !== 1) {
-      dir.translateX += dir.rate();
+    if (dir.step > 1) {
+      dir.translateX += dir.getRate();
       dir.style.transform = `translateX(${dir.translateX}%)`;
       dir.step--;
     };
@@ -80,21 +79,14 @@ function initSwapSlide(slider) {
   let x, startX, requestID;
 
   dir.ontouchstart = (e) => {
-    e.preventDefault();
     x = 0;
     startX = e.touches[0].clientX;
     dir.classList.remove('animate');
 
     (function step () {
-// FIXME:
-      if ( (x > 0 && dir.step == 1) || (x < 0 && dir.step == dir.steps) ) {
-        requestID = requestAnimationFrame(step);
-        return;
-      }
-
       dir.style.transform = `translateX( calc(${x}px + ${dir.translateX}%) )`;
       requestID = requestAnimationFrame(step);
-    })()
+    })();
   };
 
   dir.ontouchmove = (e) => {
@@ -105,6 +97,11 @@ function initSwapSlide(slider) {
   dir.ontouchend = () => {
     window.cancelAnimationFrame(requestID);
     dir.classList.add('animate');
+
+    if (x > 0 && dir.step == 1 || x < 0 && dir.step == dir.childElementCount) {
+      dir.style.transform = `translateX(${dir.translateX}%)`;
+      return
+    };
 
     if (x > 0) {
       slider.back();
