@@ -4,7 +4,7 @@ let imgMenu = document.querySelector('header img');
 let menu = document.querySelector('.menu');
 
 (function preLoad() {
-//  console.log('this is testing version');
+  console.log('this is testing version');
   initBtnsMenu();
   initlazyImgs();
 })();
