@@ -36,7 +36,7 @@ function initBtnsMenu() {
   let main = document.querySelector('.main');
   let lastClickedEl = main;
 
-  let mains = document.querySelectorAll('main > div:not(.main)');
+  let mains = document.querySelectorAll('main section:not(.main)');
   let menuList = document.querySelectorAll('.menu-content div');
 
   for (let i = 0; i < menuList.length; i++) {
